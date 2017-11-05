@@ -102,7 +102,7 @@ color:#00303f;">I.O.U. - Virtual Currency Transactions</h1>
 
         <div class="col-md-6">
             <div class="panel" style="margin-top:80px; min-height: 417px;">
-                <div class="panel-heading" style="background-color: #4484ce;color:white;">
+                <div class="panel-heading" style="background-color: #4484ce;color:white; ">
                     <h3 class="text-center">User login</h3>
                 </div>
                 <div class="panel-body" style="background-color: #d9d9d9; margin-top: 40px;">
