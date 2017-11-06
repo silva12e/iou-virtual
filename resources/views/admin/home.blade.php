@@ -8,18 +8,13 @@
             </div>
             <div class="panel-body" >
                 <div class="row" style="padding:20px;">
-                    <div class="col-md-4 col-sm-4">
-                    </div>
-                    <div class="col-md-6">
-                        
-                        
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="panel" style="margin-top:40px;padding-top:20px;">
+        <div class="panel" style="">
             <div class="panel-heading">
                 <h1 class="main-h"> <i class="fa fa-tachometer main-i" aria-hidden="true"></i> Control Center</h1>
             </div>

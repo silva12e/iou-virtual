@@ -1,12 +1,15 @@
 body
 {
-    background-color:#f19f4d;
+    background-color:#fff;
 
 }
 
 .panel
 {
   border-color:#00303f;
+  background-color: #d9d9d9;
+  margin-top:40px;
+  padding-top:20px;
 }
 
 h1 {
@@ -59,7 +62,7 @@ h1:before{
 .black { color: #000;}
 .btn-mred { 
   color: #FFFFFF; 
-  background-color: #4484ce; 
+  background-color: #15224f; 
   border-color: black; 
 } 
  
@@ -69,8 +72,8 @@ h1:before{
 .btn-mred.active, 
 .open .dropdown-toggle.btn-mred { 
   color: #FFFFFF; 
-  background-color: #871111; 
-  border-color: #BD4242; 
+  background-color: #4484ce; 
+  border-color: black; 
 } 
  
 .btn-mred:active, 
@@ -114,9 +117,6 @@ i {  vertical-align: middle; }
 
 
 
-/************************************************************
-*************************Footer******************************
-*************************************************************/
 
 @import url(http://fonts.googleapis.com/css?family=Fjalla+One);
 @import url(http://fonts.googleapis.com/css?family=Gudea);
@@ -214,26 +214,21 @@ i {  vertical-align: middle; }
 -webkit-transition-duration: 0.5s; 
 -moz-transition-duration: 0.5s;
 -o-transition-duration: 0.5s;
-      }           
-/* 
-    Only Needed in Multi-Coloured Variation 
-                                               */
-      .social-fb:hover {
-        color: #3B5998;
-      }
-      .social-tw:hover {
-        color: #4099FF;
-      }
-      .social-gp:hover {
-        color: #d34836;
-      }
-      .social-em:hover {
-        color: #f39c12;
-      }
-      .nomargin { margin:0px; padding:0px;}
+}           
 
-
-
+.social-fb:hover {
+  color: #3B5998;
+}
+.social-tw:hover {
+  color: #4099FF;
+}
+.social-gp:hover {
+  color: #d34836;
+}
+.social-em:hover {
+  color: #f39c12;
+}
+.nomargin { margin:0px; padding:0px;}
 
 
 .footer-bottom {

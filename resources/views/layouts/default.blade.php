@@ -10,10 +10,9 @@
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton|Concert+One|Dosis|Oleo+Script|Rozha+One" rel="stylesheet">
 </head>
-<body style="background-color:#f19f4d;">
+<body>
 	<div class="container" >
 		@yield('content')
 	</div>
-	{{-- @include('partials.footer') --}}
 </body>
 </html>
