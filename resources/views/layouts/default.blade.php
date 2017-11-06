@@ -7,12 +7,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton|Concert+One|Dosis|Oleo+Script|Rozha+One" rel="stylesheet">
 </head>
 <body style="background-color:#f19f4d;">
-	<div class="container" style="font-family: 'Dosis', sans-serif;">
+	<div class="container" >
 		@yield('content')
 	</div>
-	@include('partials.footer')
+	{{-- @include('partials.footer') --}}
 </body>
 </html>
