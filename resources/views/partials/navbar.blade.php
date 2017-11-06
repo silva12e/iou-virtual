@@ -9,7 +9,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a style="font-family: 'Dosis', sans-serif;"  href="{{ url('/') }}" style="">
+                    <a class="navbar-left" style="font-family: 'Dosis', sans-serif;"  href="{{ url('/') }}">
                        <img  src="{{url('/img/iou-logo.png')}}" alt="Image"/>
                     </a>
                 </div>

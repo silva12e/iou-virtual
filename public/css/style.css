@@ -1,28 +1,113 @@
-
 body
 {
     background-color:#f19f4d;
 
 }
-/* navbar */
-.navbar-default {
-  background: #4484ce;
-  height:100px;
-  padding-top:40px;
-  font-family: 'Dosis', sans-serif;
-  font-size:18px;
+
+.panel
+{
+  border-color:#00303f;
 }
 
-.navbar-default .navbar-nav > li > a {
+h1 {
+  font-weight: 300;
+  display: inline-block;
+  padding-bottom: 5px;
+  position: relative;
+}
+h1:before{
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    bottom: 0;
+    left: 25%;
+    border-bottom: 1px solid #4484ce;
+}
+.main-h
+{
+  color:#00303f;
+}
+.navbar-default {
+  background: #4484ce;
+  padding-top:20px;
+  font-family: 'Dosis', sans-serif;
+  font-size:18px;
+  background-border:black;
+  border-color:#f9cf00;
+}
+.main-i
+{
+  color:#4484ce;
+}
+
+.navbar-default .navbar-nav > li > a 
+{
     color: white;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
+.navbar-default .navbar-nav > li > a:focus 
+{
     color: #d9d9d9;
 }
 
-/* Title */
-.navbar-default .navbar-brand {
-    color: ;
+.navbar-default .navbar-brand 
+{
+
 }
+.black { color: #000;}
+.btn-mred { 
+  color: #FFFFFF; 
+  background-color: #4484ce; 
+  border-color: black; 
+} 
+ 
+.btn-mred:hover, 
+.btn-mred:focus, 
+.btn-mred:active, 
+.btn-mred.active, 
+.open .dropdown-toggle.btn-mred { 
+  color: #FFFFFF; 
+  background-color: #871111; 
+  border-color: #BD4242; 
+} 
+ 
+.btn-mred:active, 
+.btn-mred.active, 
+.open .dropdown-toggle.btn-mred { 
+  background-image: none; 
+} 
+ 
+.btn-mred.disabled, 
+.btn-mred[disabled], 
+fieldset[disabled] .btn-mred, 
+.btn-mred.disabled:hover, 
+.btn-mred[disabled]:hover, 
+fieldset[disabled] .btn-mred:hover, 
+.btn-mred.disabled:focus, 
+.btn-mred[disabled]:focus, 
+fieldset[disabled] .btn-mred:focus, 
+.btn-mred.disabled:active, 
+.btn-mred[disabled]:active, 
+fieldset[disabled] .btn-mred:active, 
+.btn-mred.disabled.active, 
+.btn-mred[disabled].active, 
+fieldset[disabled] .btn-mred.active { 
+  background-color: #E01919; 
+  border-color: #BD4242; 
+} 
+ 
+.btn-mred .badge { 
+  color: #E01919; 
+  background-color: #FFFFFF; 
+}
+i {  vertical-align: middle; }
+.table-users tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+.nav-user-photo {
+     vertical-align: middle;
+}
+
