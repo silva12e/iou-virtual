@@ -26,4 +26,24 @@ class HomeController extends Controller
     {
         return view('admin.home');
     }
+
+    public function editProfile()
+    {
+        $user = Auth::user();
+
+        return view('admin.edit',compact('user', $user));
+    }
+
+    public function updateProfile(Request $request)
+    {
+
+        $user = Auth::user();
+        $user->username = Request::input('username');
+        $user->email = Request::input('email');
+        $user->avatar = Request::input('avatar');
+        $user->save();
+
+        Flash::message('Your account has been updated!');
+        return Redirect::to('/');
+    }
 }

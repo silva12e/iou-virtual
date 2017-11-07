@@ -252,4 +252,17 @@ i {  vertical-align: middle; }
 .design a {
     color: #fff;
 }
+.notification
+{
+   position: absolute;
+    top: 6px;
+    /*left: 12px;*/
+
+    color: rgba(212, 19, 13, 1);
+
+    padding: 1px 3px;
+    font-size: 10px ;
+
+}
+}
 

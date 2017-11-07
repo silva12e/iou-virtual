@@ -23,7 +23,7 @@
                     <div class="col-md-4 col-sm-4">
                     </div>
                     <div class="col-md-6">
-                        <a href="#" class="btn btn-mred btn-lg" role="button" style="width:100px;">
+                        <a href="admin/transactions/index" class="btn btn-mred btn-lg" role="button" style="width:100px;">
                             <span class="fa fa-dollar"></span> <br/>New <br />transfer
                         </a>
                         <a href="#" class="btn btn-mred btn-lg" role="button" style="width:100px;">
