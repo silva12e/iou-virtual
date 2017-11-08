@@ -7,48 +7,18 @@
 	    	<div class="panel-body">
 				<div class="table-container">
                     <table class="table-users table" border="0">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Amount (VC)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
-                                <td width="10" align="center">
-                                    <i class="fa fa-2x fa-user fw"></i>
-                                </td>
-                                <td>
-                                     John Smith<br><i class="fa fa-envelope"></i>
-                                </td>
-                                <td>
-                                    Builder Admin
-                                </td>
-                                <td align="center">
-                                    Last Login:  6/14/2017<br><small class="text-muted">2 days ago</small>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="10" align="center">
-                                    <i class="fa fa-2x fa-user fw"></i>
-                                </td>
-                                <td>
-                                     John Smith<br><i class="fa fa-envelope"></i>
-                                </td>
-                                <td>
-                                    Builder Admin
-                                </td>
-                                <td align="center">
-                                    Last Login:  6/14/2017<br><small class="text-muted">2 days ago</small>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="10" align="center">
-                                    <i class="fa fa-2x fa-user fw"></i>
-                                </td>
-                                <td>
-                                     John Smith<br><i class="fa fa-envelope"></i>
-                                </td>
-                                <td>
-                                    Builder Admin
-                                </td>
-                                <td align="center">
-                                    Last Login:  6/14/2017<br><small class="text-muted">2 days ago</small>
-                                </td>
+                                <td>here</td>
+                                <td>here</td>
+                                <td>here</td>
                             </tr>
                         </tbody>
                     </table>

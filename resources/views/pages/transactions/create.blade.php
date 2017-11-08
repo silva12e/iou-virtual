@@ -1,4 +1,6 @@
 @extends('layouts.app')
 @section('content')
-create
+<div class="container">
+	<create-transaction></create-transaction>
+</div>
 @stop

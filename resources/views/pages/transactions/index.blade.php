@@ -1,4 +1,6 @@
 @extends('layouts.app')
 @section('content')
-index
+<div class="container">
+	<transaction-log></transaction-log>
+</div>
 @stop

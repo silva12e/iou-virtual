@@ -5,6 +5,7 @@ use Auth;
 use Illuminate\Http\Request;
 
 
+
 class HomeController extends Controller
 {
  
@@ -15,11 +16,13 @@ class HomeController extends Controller
 
     public function getHomepage()
     {
-        if($user = Auth::user())
+        $user = Auth::user();
+        
+        if($user)
         {
             return redirect('admin/home');
         }
-        return view('pages.homepage'); 
+        return view('pages.homepage', compact($user)); 
     }
 
     public function index()

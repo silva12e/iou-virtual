@@ -11,16 +11,12 @@
 				<form method="POST" action="update" >
 					<div class="form form-group" style="padding:40px;">
 						<div class="row">
-							<img class="img-responsive" src="{{url('/img/default.jpeg')}}" style="width: 150px; height: 150px; border-radius: 50%"  align="profile-picture">
-							<input type="file" name="avatar" style="padding-top:20px;">
-						</div>
-						<br>
-						<br>
-						<div class="row">
+							<label class="form-label">Name</label>
 							<input value="{{ $user->name }}" class="form-control" type="text" class="form-control" name="name" id="name">
 						</div>
 						<br>
 						<div class="row">
+							<label class="form-label">E-mail</label>
 							<input value="{{ $user->email }}" placeholder="email" class="form-control" type="email" class="form-control" name="email" id="email">
 						</div>
 						<br>
