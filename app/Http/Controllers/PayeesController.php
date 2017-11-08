@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Payee;
+use App\User;
 use Illuminate\Http\Request;
 
 class PayeesController extends Controller
@@ -16,7 +17,14 @@ class PayeesController extends Controller
     
     public function create()
     {
-        return view('pages.payees.create');
+        $users = User::all();
+        return view('pages.payees.create', compact('users', $users));
+    }
+
+    public function getAllPayees()
+    {
+        $payees = User::all();
+        return response()->json(['payees'=>$payees]);
     }
 
     public function store(Request $request)

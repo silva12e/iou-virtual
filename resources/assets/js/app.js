@@ -19,6 +19,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('transaction-log', require('./components/TransactionLog.vue'));
 Vue.component('create-transaction', require('./components/createTransaction.vue'));
 Vue.component('account-summary', require('./components/AccountSummary.vue'));
+Vue.component('payees-index', require('./components/Payee.index.vue'));
+Vue.component('account-summary', require('./components/AccountSummary.vue'));
 
 
 const app = new Vue({

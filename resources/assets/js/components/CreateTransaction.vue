@@ -9,15 +9,21 @@
 					<div class="col-md-6">
 						<form style="padding-left:20px;">
 							<div class="form-group">
-								<input placeholder="Payee Username" type="text" class="form-control" name="to">
+								<label class="form-label">Payee (username)</label>
+								<select class="form-control" multiple>
+									 <option v-for="p in payees" v-bind:value="p.id">{{ p.username }}</option>
+								</select>
 							</div>
 							<div class="form-group">
-								<input placeholder="VC amount e.g 0.22" type="number" class="form-control" name="amount">
+								<label class="form-label">Amount (VC)</label>
+								<input type="number" class="form-control" name="amount">
 							</div>
 							<div class="form-group">
-								<textarea style="height:100px;" name="message" class="form-control">Optional message to payee(s)</textarea>
+								<label class="form-label">Message (optional)</label>
+								<textarea style="height:100px;" name="message" class="form-control"></textarea>
 							</div>
 							<div class="form-group" style="padding-top:20px;">
+							
 								<button class="btn btn-primary">Send VC</button>
 							</div>
 						</form>
@@ -27,8 +33,19 @@
 		</div>
 	</div>
 </template>
-<script type="text/javascript">
-	
-	
+<script>
+	export default {
+
+        data() {
+            return {
+    			payees:[],
+    			numberOfPayees: 1
+            }
+        },
+        mounted()
+        {
+        	axios.get('/admin/payees/all/').then(response => this.payees = response.data.payees);
+        },
+    }
 
 </script>

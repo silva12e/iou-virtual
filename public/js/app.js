@@ -1101,6 +1101,8 @@ Vue.component('example-component', __webpack_require__(39));
 Vue.component('transaction-log', __webpack_require__(42));
 Vue.component('create-transaction', __webpack_require__(44));
 Vue.component('account-summary', __webpack_require__(47));
+Vue.component('payees-index', __webpack_require__(59));
+Vue.component('account-summary', __webpack_require__(47));
 
 var app = new Vue({
   el: '#app'
@@ -42929,8 +42931,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 45 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -42960,6 +42964,28 @@ module.exports = Component.exports
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            payees: [],
+            numberOfPayees: 1
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get('/admin/payees/all/').then(function (response) {
+            return _this.payees = response.data.payees;
+        });
+    }
+});
 
 /***/ }),
 /* 46 */
@@ -42969,85 +42995,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "main-container" } }, [
+    _c("div", { staticClass: "panel" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c(
+          "div",
+          { staticClass: "row", staticStyle: { "padding-top": "40px" } },
+          [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("form", { staticStyle: { "padding-left": "20px" } }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { staticClass: "form-label" }, [
+                    _vm._v("Payee (username)")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    { staticClass: "form-control", attrs: { multiple: "" } },
+                    _vm._l(_vm.payees, function(p) {
+                      return _c("option", { domProps: { value: p.id } }, [
+                        _vm._v(_vm._s(p.username))
+                      ])
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3)
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "main-container" } }, [
-      _c("div", { staticClass: "panel" }, [
-        _c("div", { staticClass: "panel-heading" }, [
-          _c("h1", { staticClass: "main-h" }, [
-            _c("i", {
-              staticClass: "fa fa-plus main-i",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" New Transaction")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "panel-body" }, [
-          _c(
-            "div",
-            { staticClass: "row", staticStyle: { "padding-top": "40px" } },
-            [
-              _c("div", { staticClass: "col-md-6" }, [
-                _c("form", { staticStyle: { "padding-left": "20px" } }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        placeholder: "Payee Username",
-                        type: "text",
-                        name: "to"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        placeholder: "VC amount e.g 0.22",
-                        type: "number",
-                        name: "amount"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "textarea",
-                      {
-                        staticClass: "form-control",
-                        staticStyle: { height: "100px" },
-                        attrs: { name: "message" }
-                      },
-                      [_vm._v("Optional message to payee(s)")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "padding-top": "20px" }
-                    },
-                    [
-                      _c("button", { staticClass: "btn btn-primary" }, [
-                        _vm._v("Send VC")
-                      ])
-                    ]
-                  )
-                ])
-              ])
-            ]
-          )
-        ])
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("h1", { staticClass: "main-h" }, [
+        _c("i", {
+          staticClass: "fa fa-plus main-i",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" New Transaction")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "form-label" }, [_vm._v("Amount (VC)")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "number", name: "amount" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "form-label" }, [
+        _vm._v("Message (optional)")
+      ]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        staticStyle: { height: "100px" },
+        attrs: { name: "message" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-group", staticStyle: { "padding-top": "20px" } },
+      [_c("button", { staticClass: "btn btn-primary" }, [_vm._v("Send VC")])]
+    )
   }
 ]
 render._withStripped = true
@@ -43132,6 +43172,136 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(60)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Payee.index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ac4a1f76", Component.options)
+  } else {
+    hotAPI.reload("data-v-ac4a1f76", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        {
+          staticClass: "panel",
+          staticStyle: { "margin-top": "40px", "padding-top": "20px" }
+        },
+        [
+          _c("div", { staticClass: "panel-heading" }, [
+            _c("h1", { staticClass: "main-h" }, [
+              _c("i", { staticClass: "fa fa-user main-i" }),
+              _vm._v(" Payees")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "panel-body" }, [
+            _c("div", { staticClass: "table-container" }, [
+              _c(
+                "table",
+                { staticClass: "table-users table", attrs: { border: "0" } },
+                [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("Full-Name ")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("uernames")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Email")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", [_vm._v("here")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("here")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("here")])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ac4a1f76", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

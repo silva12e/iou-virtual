@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-	index payees
+	<payees-index></payees-index>
 </div>
 @stop

@@ -11,6 +11,8 @@ Route::get('/admin/payees/' , 'PayeesController@index');
 Route::get('/admin/payees/create/' , 'PayeesController@create');
 Route::post('/admin/payees/store' , 'PayeesController@store');
 Route::get('/admin/payees/show/$id/' , 'PayeesController@show');
+Route::get('/admin/payees/all/' , 'PayeesController@getAllPayees');
+
 
 Route::post('/admin/edit/update', 'HomeController@updateProfile');
 Route::get('/admin/edit/profile/', 'HomeController@editProfile');
