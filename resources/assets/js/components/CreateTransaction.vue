@@ -7,10 +7,10 @@
 			<div class="panel-body">
 				<div class="row" style="padding-top:40px;">
 					<div class="col-md-6">
-						<form style="padding-left:20px;">
+						<form @submit.prevent="submit" style="padding-left:20px;">
 							<div class="form-group">
 								<label class="form-label">Payee (username)</label>
-								<select class="form-control" multiple>
+								<select v-model="selectedPayees" name="to_user_id" class="form-control" multiple>
 									 <option v-for="p in payees" v-bind:value="p.id">{{ p.username }}</option>
 								</select>
 							</div>
@@ -23,7 +23,7 @@
 								<textarea style="height:100px;" name="message" class="form-control"></textarea>
 							</div>
 							<div class="form-group" style="padding-top:20px;">
-							
+								<input type="hidden" name="from_user_id" v-model="user">
 								<button class="btn btn-primary">Send VC</button>
 							</div>
 						</form>
@@ -39,13 +39,27 @@
         data() {
             return {
     			payees:[],
-    			numberOfPayees: 1
+    			user:'',
+    			selectedPayees:[]
             }
         },
         mounted()
         {
-        	axios.get('/admin/payees/all/').then(response => this.payees = response.data.payees);
+        	axios.get('/admin/payees/all/')
+        	.then(response=>{
+        		this.payees = response.data.payees;
+        		this.user = response.data.user;
+        	})
         },
+        methods:
+        {
+        	submit(event)
+        	{
+        		let formData = new FormData(event.target);
+        		axios.post('/admin/transactions/store', formData).then
+        		(response => console.log('payee has been added'));
+        	}
+        }
     }
 
 </script>

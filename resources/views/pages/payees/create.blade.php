@@ -4,14 +4,15 @@
 	<div class="row" style="padding-top:40px;">
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
-			<form>
+			<form action="/admin/payees/store" method="POST">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="form-group">
 					<label class="form-label" for="username" style="padding-bottom:10px;" >
 						Enter username
 					</label>
 					<select name="username" id="username" class="form-control">
 			            @foreach($users as $key => $user)
-			            <option value="{{ $key }}">{{ $user->username }}</option>
+			            <option value="{{ $user->username }}">{{ $user->username }}</option>
 			            @endforeach
 			        </select>
 				</div>

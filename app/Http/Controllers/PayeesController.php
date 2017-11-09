@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Payee;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class PayeesController extends Controller
@@ -23,13 +24,17 @@ class PayeesController extends Controller
 
     public function getAllPayees()
     {
-        $payees = User::all();
-        return response()->json(['payees'=>$payees]);
+        $payees = Payee::all();
+        $user = Auth::user()->id;
+        return response()->json(['payees'=>$payees, 'authUser'=>$user]);
     }
 
     public function store(Request $request)
     {
-        
+        $payee = new Payee;
+        $payee->username = $request->username;
+        $payee->payer_id = Auth::user()->id;
+        $payee->save();
     }
 
     

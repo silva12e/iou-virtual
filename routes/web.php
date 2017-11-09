@@ -10,6 +10,8 @@ Route::get('/admin/transacations/show/$id/' , 'TransactionsController@show');
 Route::get('/admin/payees/' , 'PayeesController@index');
 Route::get('/admin/payees/create/' , 'PayeesController@create');
 Route::post('/admin/payees/store' , 'PayeesController@store');
+
+Route::get('/admin/transactions/user-transactions' , 'TransactionsController@UserTransactions');
 Route::get('/admin/payees/show/$id/' , 'PayeesController@show');
 Route::get('/admin/payees/all/' , 'PayeesController@getAllPayees');
 

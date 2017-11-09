@@ -42767,7 +42767,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(65)
 /* template */
 var __vue_template__ = __webpack_require__(43)
 /* template functional */
@@ -42816,59 +42816,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      {
+        staticClass: "panel",
+        staticStyle: { "margin-top": "40px", "padding-top": "20px" }
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "table-container" }, [
+            _c(
+              "table",
+              { staticClass: "table-users table", attrs: { border: "0" } },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.transactions, function(t) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(t.user.username))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(t.amount))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(t.status))])
+                    ])
+                  })
+                )
+              ]
+            )
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        {
-          staticClass: "panel",
-          staticStyle: { "margin-top": "40px", "padding-top": "20px" }
-        },
-        [
-          _c("div", { staticClass: "panel-heading" }, [
-            _c("h1", { staticClass: "main-h" }, [
-              _c("i", { staticClass: "fa fa-calendar main-i" }),
-              _vm._v(" Transaction Log")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _c("div", { staticClass: "table-container" }, [
-              _c(
-                "table",
-                { staticClass: "table-users table", attrs: { border: "0" } },
-                [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", [_vm._v("Username")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Amount (VC)")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Status")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v("here")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("here")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("here")])
-                    ])
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]
-      )
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("h1", { staticClass: "main-h" }, [
+        _c("i", { staticClass: "fa fa-calendar main-i" }),
+        _vm._v(" Transaction Log")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("To")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Amount (VC)")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")])
+      ])
     ])
   }
 ]
@@ -42975,15 +42984,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             payees: [],
-            numberOfPayees: 1
+            user: '',
+            selectedPayees: []
         };
     },
     mounted: function mounted() {
         var _this = this;
 
         axios.get('/admin/payees/all/').then(function (response) {
-            return _this.payees = response.data.payees;
+            _this.payees = response.data.payees;
+            _this.user = response.data.user;
         });
+    },
+
+    methods: {
+        submit: function submit(event) {
+            var formData = new FormData(event.target);
+            axios.post('/admin/transactions/store', formData).then(function (response) {
+                return console.log('payee has been added');
+            });
+        }
     }
 });
 
@@ -43005,29 +43025,99 @@ var render = function() {
           { staticClass: "row", staticStyle: { "padding-top": "40px" } },
           [
             _c("div", { staticClass: "col-md-6" }, [
-              _c("form", { staticStyle: { "padding-left": "20px" } }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { staticClass: "form-label" }, [
-                    _vm._v("Payee (username)")
+              _c(
+                "form",
+                {
+                  staticStyle: { "padding-left": "20px" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.submit($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Payee (username)")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.selectedPayees,
+                            expression: "selectedPayees"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "to_user_id", multiple: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.selectedPayees = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      _vm._l(_vm.payees, function(p) {
+                        return _c("option", { domProps: { value: p.id } }, [
+                          _vm._v(_vm._s(p.username))
+                        ])
+                      })
+                    )
                   ]),
                   _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
                   _c(
-                    "select",
-                    { staticClass: "form-control", attrs: { multiple: "" } },
-                    _vm._l(_vm.payees, function(p) {
-                      return _c("option", { domProps: { value: p.id } }, [
-                        _vm._v(_vm._s(p.username))
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "padding-top": "20px" }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user,
+                            expression: "user"
+                          }
+                        ],
+                        attrs: { type: "hidden", name: "from_user_id" },
+                        domProps: { value: _vm.user },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.user = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("button", { staticClass: "btn btn-primary" }, [
+                        _vm._v("Send VC")
                       ])
-                    })
+                    ]
                   )
-                ]),
-                _vm._v(" "),
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _vm._m(3)
-              ])
+                ]
+              )
             ])
           ]
         )
@@ -43078,16 +43168,6 @@ var staticRenderFns = [
         attrs: { name: "message" }
       })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "form-group", staticStyle: { "padding-top": "20px" } },
-      [_c("button", { staticClass: "btn btn-primary" }, [_vm._v("Send VC")])]
-    )
   }
 ]
 render._withStripped = true
@@ -43302,6 +43382,61 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-ac4a1f76", module.exports)
   }
 }
+
+/***/ }),
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            transactions: []
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get('/admin/transactions/user-transactions').then(function (response) {
+            _this.transactions = response.data.transactions;
+        });
+    }
+});
 
 /***/ })
 /******/ ]);
