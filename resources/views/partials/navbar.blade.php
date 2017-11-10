@@ -28,10 +28,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    
-                                    <li>
-                                        <a href="{{ url('/admin/edit/profile') }}"><i class="glyphicon glyphicon-pencil"></i> Edit Profile</a>
-                                    </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

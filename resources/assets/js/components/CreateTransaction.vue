@@ -15,16 +15,21 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="form-label">Amount (VC)</label>
-								<input type="number" class="form-control" name="amount">
+								<label class="form-label">Amount (VC) <small>Current Balance({{ authUser.balance }})</small></label>
+								<input @change="test(authUser.balance)" type="number" v-model="isValidAmount" class="form-control" name="amount">
 							</div>
 							<div class="form-group">
 								<label class="form-label">Message (optional)</label>
 								<textarea style="height:100px;" name="message" class="form-control"></textarea>
 							</div>
 							<div class="form-group" style="padding-top:20px;">
-								<input type="hidden" name="from_user_id" v-model="user">
-								<button class="btn btn-primary">Send VC</button>
+								<input type="hidden" name="from_user_id" v-model="authUser.id">
+								<div v-if="!showSendButton">
+									<p style="color:red">Please, Enter valid amount</p>
+								</div>
+								<div v-else>
+									<button class="btn btn-primary">Send VC</button>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -39,8 +44,10 @@
         data() {
             return {
     			payees:[],
-    			user:'',
-    			selectedPayees:[]
+    			authUser:'',
+    			selectedPayees:[],
+    			showSendButton:true,
+    			isValidAmount:0
             }
         },
         mounted()
@@ -48,7 +55,8 @@
         	axios.get('/admin/payees/all/')
         	.then(response=>{
         		this.payees = response.data.payees;
-        		this.user = response.data.user;
+        		this.authUser = response.data.authUser;
+
         	})
         },
         methods:
@@ -58,6 +66,13 @@
         		let formData = new FormData(event.target);
         		axios.post('/admin/transactions/store', formData).then
         		(response => console.log('payee has been added'));
+        	},
+        	test(balance)
+        	{
+				if(balance < isValidamount)
+					this.showSendButton = false;
+				else
+					this.showSendButton = true;
         	}
         }
     }

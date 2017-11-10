@@ -17,7 +17,6 @@ Route::get('/admin/payees/all/' , 'PayeesController@getAllPayees');
 
 
 Route::post('/admin/edit/update', 'HomeController@updateProfile');
-Route::get('/admin/edit/profile/', 'HomeController@editProfile');
 
 Auth::routes();
 Route::get('/admin/home', 'HomeController@index')->name('home');

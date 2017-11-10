@@ -14,7 +14,7 @@
                 
             </div>
             <div class="row" style="padding:20px;">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h3>TOTAL BALANCE (VC) - <span style="font-size:28px;padding-left:20px;">{{ auth()->user()->balance }}</span></h3>
                 </div>
             </div>

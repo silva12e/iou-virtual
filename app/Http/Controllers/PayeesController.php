@@ -25,7 +25,7 @@ class PayeesController extends Controller
     public function getAllPayees()
     {
         $payees = Payee::all();
-        $user = Auth::user()->id;
+        $user = Auth::user();
         return response()->json(['payees'=>$payees, 'authUser'=>$user]);
     }
 
@@ -35,29 +35,5 @@ class PayeesController extends Controller
         $payee->username = $request->username;
         $payee->payer_id = Auth::user()->id;
         $payee->save();
-    }
-
-    
-    public function show(Payee $payee)
-    {
-
-    }
-
-   
-    public function edit(Payee $payee)
-    {
-        
-    }
-
-    
-    public function update(Request $request, Payee $payee)
-    {
-        
-    }
-
-    
-    public function destroy(Payee $payee)
-    {
-        
     }
 }

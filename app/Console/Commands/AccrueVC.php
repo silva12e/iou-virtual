@@ -22,7 +22,7 @@ class AccrueVC extends Command
         
         foreach($users as $user)
         {
-            $user->balance = (float) filter_var( $user->balance , FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION) + 0.20;
+            $user->balance = number_format((float) filter_var( $user->balance , FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION) + 0.20, 2);
             $user->save();
         }     
     }

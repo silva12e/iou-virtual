@@ -42979,32 +42979,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            payees: [],
-            user: '',
-            selectedPayees: []
-        };
-    },
-    mounted: function mounted() {
-        var _this = this;
+  data: function data() {
+    return {
+      payees: [],
+      authUser: '',
+      selectedPayees: [],
+      showSendButton: true,
+      isValidAmount: 0
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-        axios.get('/admin/payees/all/').then(function (response) {
-            _this.payees = response.data.payees;
-            _this.user = response.data.user;
-        });
-    },
+    axios.get('/admin/payees/all/').then(function (response) {
+      _this.payees = response.data.payees;
+      _this.authUser = response.data.authUser;
+    });
+  },
 
-    methods: {
-        submit: function submit(event) {
-            var formData = new FormData(event.target);
-            axios.post('/admin/transactions/store', formData).then(function (response) {
-                return console.log('payee has been added');
-            });
-        }
+  methods: {
+    submit: function submit(event) {
+      var formData = new FormData(event.target);
+      axios.post('/admin/transactions/store', formData).then(function (response) {
+        return console.log('payee has been added');
+      });
+    },
+    test: function test(balance) {
+      if (balance < isValidamount) this.showSendButton = false;else this.showSendButton = true;
     }
+  }
 });
 
 /***/ }),
@@ -43079,9 +43089,45 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(1),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Amount (VC) "),
+                      _c("small", [
+                        _vm._v(
+                          "Current Balance(" +
+                            _vm._s(_vm.authUser.balance) +
+                            ")"
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.isValidAmount,
+                          expression: "isValidAmount"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", name: "amount" },
+                      domProps: { value: _vm.isValidAmount },
+                      on: {
+                        change: function($event) {
+                          _vm.test(_vm.authUser.balance)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.isValidAmount = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -43095,25 +43141,33 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.user,
-                            expression: "user"
+                            value: _vm.authUser.id,
+                            expression: "authUser.id"
                           }
                         ],
                         attrs: { type: "hidden", name: "from_user_id" },
-                        domProps: { value: _vm.user },
+                        domProps: { value: _vm.authUser.id },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.user = $event.target.value
+                            _vm.$set(_vm.authUser, "id", $event.target.value)
                           }
                         }
                       }),
                       _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-primary" }, [
-                        _vm._v("Send VC")
-                      ])
+                      !_vm.showSendButton
+                        ? _c("div", [
+                            _c("p", { staticStyle: { color: "red" } }, [
+                              _vm._v("Please, Enter valid amount")
+                            ])
+                          ])
+                        : _c("div", [
+                            _c("button", { staticClass: "btn btn-primary" }, [
+                              _vm._v("Send VC")
+                            ])
+                          ])
                     ]
                   )
                 ]
@@ -43138,19 +43192,6 @@ var staticRenderFns = [
         }),
         _vm._v(" New Transaction")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Amount (VC)")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", name: "amount" }
-      })
     ])
   },
   function() {
