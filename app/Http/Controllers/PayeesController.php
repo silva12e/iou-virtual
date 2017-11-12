@@ -42,10 +42,15 @@ class PayeesController extends Controller
         $payee->username = $request->username;
         $payee->payer_id = Auth::user()->id;
         $payee_id = User::where('username', $payee->username)->get()->pluck('id');
-        $payee->payee_id= preg_replace(array('/^\[/','/\]$/'), '',$payee_id);   
+        $payee->payee_id= preg_replace(array('/^\[/','/\]$/'), '',$payee_id);
+        
+        if(Payee::where('payer_id', $payee->payer_id)->where('payee_id', $payee->payee_id)->first() != '')
+        {
+            return redirect()->back()->with('message', 'Sorry, This user has already been added');
+        }
+
 
         $payee->save();
-
         return redirect('admin/home');
     }
 }

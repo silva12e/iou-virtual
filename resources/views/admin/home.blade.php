@@ -38,7 +38,7 @@
                             <span class="fa fa-dollar"></span> <br/>New <br />transfer
                         </a>
                         <a href="/admin/payees/" class="btn btn-mred btn-lg" role="button" style="width:100px;">
-                            <span class="fa fa-address-card" aria-hidden="true"></span> <br/>View/Edit<br />Payees
+                            <span class="fa fa-address-card" aria-hidden="true"></span> <br/>View<br />Payees
                         </a>
                         <a href="/admin/payees/create" class="btn btn-mred btn-lg" role="button" style="width:100px;">
                             <span class="fa fa-plus-circle" aria-hidden="true"></span> <br/>Add<br />Payee

@@ -10,6 +10,13 @@
 	        </ul>
 	    </div>
 	@endif
+	@if (session('message'))
+	    <div class="alert alert-danger">
+	        <ul>
+	            <li>{{ session('message') }}</li>
+	        </ul>
+	    </div>
+	@endif
 	<div class="row" style="padding-top:40px;">
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
@@ -26,7 +33,6 @@
 			            @endforeach
 			        </select>
 				</div>
-
 				<div class="form-group" style="padding-top:40px;">
 					<button class="btn btn-primary">Add new payee</button>
 				</div>
