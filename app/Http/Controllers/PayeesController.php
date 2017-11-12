@@ -14,7 +14,6 @@ class PayeesController extends Controller
     {
         return view('pages.payees.index');
     }
-
     
     public function create()
     {
@@ -35,5 +34,7 @@ class PayeesController extends Controller
         $payee->username = $request->username;
         $payee->payer_id = Auth::user()->id;
         $payee->save();
+
+        return redirect('admin/home');
     }
 }

@@ -9,7 +9,7 @@
             <div class="panel-body" >
             <div class="row" style="padding:20px;">
                 <div class="col-md-6">
-                    <h3>{{ auth()->user()->name }} ({{ auth()->user()->username }})</h3>
+                    <h3>{{ auth()->user()->name }} (Username: {{ auth()->user()->username }} )</h3>
                 </div>
                 
             </div>
