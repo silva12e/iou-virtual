@@ -12,6 +12,7 @@
                             <th>To</th>
                             <th>Amount (VC)</th>
                             <th>Status</th>
+                            <th>Transaction Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,6 +20,7 @@
                             <td>{{ t.user.username }}</td>
                             <td>{{ t.amount }}</td>
                             <td>{{ t.status }}</td>
+                            <td>{{ t.created_at }}</td>
                         </tr>
                     </tbody>
                 </table>

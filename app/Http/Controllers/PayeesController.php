@@ -17,13 +17,13 @@ class PayeesController extends Controller
     
     public function create()
     {
-        $users = User::all();
+        $users = User::where('id', '!=', Auth::id())->get();
         return view('pages.payees.create', compact('users', $users));
     }
 
     public function getAllPayees()
     {
-        $payees = Payee::all();
+        $payees = Payee::getUserInformation();
         $user = Auth::user();
         return response()->json(['payees'=>$payees, 'authUser'=>$user]);
     }

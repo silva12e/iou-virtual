@@ -21,6 +21,11 @@
     "dependencies": {
         "select2": "^4.0.6-rc.0",
         "select2-bootstrap-theme": "0.1.0-beta.10",
-        "vue-select2": "^0.2.6"
+        "sweetalert": "^2.0.8",
+        "v-money": "^0.8.1",
+        "vee-validate": "^2.0.0-rc.21",
+        "vue-select2": "^0.2.6",
+        "vuejs-paginate": "^1.4.0",
+        "vuejs-paginator": "^2.0.2"
     }
 }

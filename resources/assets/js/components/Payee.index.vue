@@ -15,10 +15,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>here</td>
-                            <td>here</td>
-                            <td>here</td>
+                        <tr v-for="p in payees">
+                            <td>{{ p.user.name }}</td>
+                            <td>{{ p.username }}</td>
+                            <td>{{ p.user.email }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -27,3 +27,20 @@
     </div>
 </div>
 </template>
+<script type="text/javascript">
+    export default {
+
+        data() {
+            return {
+                payees:[]
+            }
+        },
+        mounted()
+        {
+            axios.get('/admin/payees/all')
+            .then(response=>{
+                this.payees = response.data.payees;
+            })
+        }
+    }
+</script>

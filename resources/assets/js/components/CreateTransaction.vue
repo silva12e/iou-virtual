@@ -10,13 +10,16 @@
 						<form @submit.prevent="submit" style="padding-left:20px;">
 							<div class="form-group">
 								<label class="form-label">Payee (username)</label>
-								<select v-model="selectedPayees" name="to_user_id" class="form-control" multiple>
+								<select v-validate="'required'" data-vv-as="Payee" v-model="selectedPayees" name="to_user_id" class="form-control" multiple>
 									 <option v-for="p in payees" v-bind:value="p.id">{{ p.username }}</option>
 								</select>
+								<span style="color:red" class="error" v-show="errors.has('to_user_id')">{{ errors.first('to_user_id') }}</span>
 							</div>
 							<div class="form-group">
 								<label class="form-label">Amount (VC) <small>Current Balance({{ authUser.balance }})</small></label>
-								<input @change="test(authUser.balance)" type="number" v-model="isValidAmount" class="form-control" name="amount">
+								<money v-validate="'required'" data-vv-as="VC Balance"  v-model="amount"  class="form-control" v-bind="money"></money> 
+								<input type="hidden" name="amount" v-model="amount">
+								<span style="color:red" class="error" v-show="errors.has('amount')">{{ errors.first('amount') }}</span>
 							</div>
 							<div class="form-group">
 								<label class="form-label">Message (optional)</label>
@@ -24,7 +27,7 @@
 							</div>
 							<div class="form-group" style="padding-top:20px;">
 								<input type="hidden" name="from_user_id" v-model="authUser.id">
-								<div v-if="!showSendButton">
+								<div v-if="!validBalance">
 									<p style="color:red">Please, Enter valid amount</p>
 								</div>
 								<div v-else>
@@ -39,42 +42,111 @@
 	</div>
 </template>
 <script>
-	export default {
+import {Money} from 'v-money';
+export default 
+{
+    data() 
+    {
+        return {
+			payees:[],
+			authUser:'',
+			selectedPayees:[],
+			showSendButton:true,
+			ErrorMessages:'',
+			amount:0.00,
+			userBalance:0,
 
-        data() {
-            return {
-    			payees:[],
-    			authUser:'',
-    			selectedPayees:[],
-    			showSendButton:true,
-    			isValidAmount:0
-            }
-        },
-        mounted()
-        {
-        	axios.get('/admin/payees/all/')
-        	.then(response=>{
-        		this.payees = response.data.payees;
-        		this.authUser = response.data.authUser;
-
-        	})
-        },
-        methods:
-        {
-        	submit(event)
-        	{
-        		let formData = new FormData(event.target);
-        		axios.post('/admin/transactions/store', formData).then
-        		(response => console.log('payee has been added'));
-        	},
-        	test(balance)
-        	{
-				if(balance < isValidamount)
-					this.showSendButton = false;
-				else
-					this.showSendButton = true;
-        	}
+			money: {
+	          decimal: '.',
+	          thousands: ',',
+	          prefix: '',
+	          precision: 2,
+	          masked: true
+	        }
         }
-    }
+    },
+    components: {Money},
+    mounted()
+    {
+    	axios.get('/admin/payees/all/')
+    	.then(response =>
+    	{
+    		this.payees = response.data.payees;
+    		this.authUser = response.data.authUser;
+    		this.userBalance = response.data.authUser.balance;
+    	})
+    },
+    computed:
+    {
+    	validBalance: function()
+    	{
+    		if(this.amount > this.userBalance)
+    			return false;
+    		return true;
+    	}
+    },
+    methods:
+    {
+    	submit(event)
+    	{
+    		let formData = new FormData(event.target);
+    		
 
+    		this.$validator.validateAll().then((result) => {
+                 if (result) {
+
+                $("form").find('button[type="submit"]').addClass("disabled");
+            	axios.post('/admin/transactions/store', formData)
+                .then(response => {
+                    console.log(response)
+                    this.error = false
+                    this.success = true
+
+                    $("form").find('button[type="submit"]').removeClass("disabled");
+
+                    if(response.data.userFound){
+                    swal({
+                      title: 'Error!',
+                      text:  'Please, Fix errors on form',
+                      type: 'error',
+                      timer: 5000
+                    }).then(
+                      function () {
+
+                      },
+                      function (dismiss) {
+                        if (dismiss === 'timer')
+                        {
+                        }
+                    });
+
+                    }else{
+                    swal({
+                      title: 'Success!',
+                      text:  'Your transaction has been made',
+                      type: 'success',
+                      timer: 5000
+                    }).then(
+                      function () {
+                        window.location.href = '/admin/transactions/';
+                      },
+                      function (dismiss) {
+                        if (dismiss === 'timer')
+                        {
+                          window.location.href = '/admin/transactions/create';
+                        }
+                    });
+
+                    }
+                }).catch(error => {
+                    console.log(error)
+                    this.error = true
+                    this.success = false
+                    this.responseMessage = error.statusText
+                });
+              }
+           	});
+    	},
+    }
+}
 </script>
