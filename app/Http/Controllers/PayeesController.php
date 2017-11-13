@@ -46,7 +46,7 @@ class PayeesController extends Controller
         
         if(Payee::where('payer_id', $payee->payer_id)->where('payee_id', $payee->payee_id)->first() != '')
         {
-            return redirect()->back()->with('message', 'Sorry, This user has already been added');
+            return redirect()->back()->with('message', 'Sorry, This Payee has already been added');
         }
 
 

@@ -49,12 +49,11 @@ class TransactionsController extends Controller
         $transaction->message = $request->message;
         $transaction->status = 'In progress';
         
-        //Change this. This will happen when the user accepts the transaction
         $userPayer = Auth::user();
-        $userPayer->balance = $user->balance - $request->amount;
+        $userPayer->balance = $userPayer->balance - $request->amount;
 
         $transaction->save();
-        $user->save();
+        $userPayer->save();
 
     }
 
