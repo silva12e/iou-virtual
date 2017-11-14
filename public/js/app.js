@@ -11638,54 +11638,7 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(38).setImmediate))
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(50)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/AccountSummary.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7ed9cba0", Component.options)
-  } else {
-    hotAPI.reload("data-v-7ed9cba0", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 11 */,
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11721,9 +11674,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vee_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('example-component', __webpack_require__(41));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('transaction-log', __webpack_require__(44));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('create-transaction', __webpack_require__(47));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('account-summary', __webpack_require__(11));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('payees-index', __webpack_require__(51));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('account-summary', __webpack_require__(11));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app'
@@ -49780,93 +49731,96 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      payees: [],
-      authUser: '',
-      selectedPayees: [],
-      showSendButton: true,
-      ErrorMessages: '',
-      amount: 0.00,
-      userBalance: 0,
+    data: function data() {
+        return {
+            payees: [],
+            authUser: '',
+            selectedPayees: [],
+            showSendButton: true,
+            amount: 0.00,
+            userBalance: 0,
+            balanceErrorMessage: '',
 
-      money: {
-        decimal: '.',
-        thousands: ',',
-        prefix: '',
-        precision: 2,
-        masked: true
-      }
-    };
-  },
-
-  components: { Money: __WEBPACK_IMPORTED_MODULE_0_v_money__["Money"] },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/admin/payees/all/').then(function (response) {
-      _this.payees = response.data.payees;
-      _this.authUser = response.data.authUser;
-      _this.userBalance = response.data.authUser.balance;
-    });
-  },
-
-  computed: {
-    validBalance: function validBalance() {
-      if (this.amount > this.userBalance) return false;
-      return true;
-    }
-  },
-  methods: {
-    submit: function submit(event) {
-      var _this2 = this;
-
-      var formData = new FormData(event.target);
-
-      this.$validator.validateAll().then(function (result) {
-        if (result) {
-
-          $("form").find('button[type="submit"]').addClass("disabled");
-          axios.post('/admin/transactions/store', formData).then(function (response) {
-            console.log(response);
-            _this2.error = false;
-            _this2.success = true;
-
-            $("form").find('button[type="submit"]').removeClass("disabled");
-
-            if (response.data.userFound) {
-              swal({
-                title: 'Error!',
-                text: 'Please, Fix errors on form',
-                type: 'error',
-                timer: 5000
-              }).then(function () {}, function (dismiss) {
-                if (dismiss === 'timer') {}
-              });
-            } else {
-              swal({
-                title: 'Success!',
-                text: 'Your transaction has been made',
-                type: 'success',
-                timer: 5000
-              }).then(function () {
-                window.location.href = '/admin/transactions/';
-              }, function (dismiss) {
-                if (dismiss === 'timer') {
-                  window.location.href = '/admin/transactions/create';
-                }
-              });
+            money: {
+                decimal: '.',
+                thousands: ',',
+                prefix: '',
+                precision: 2,
+                masked: true
             }
-          }).catch(function (error) {
-            console.log(error);
-            _this2.error = true;
-            _this2.success = false;
-            _this2.responseMessage = error.statusText;
-          });
+        };
+    },
+
+    components: { Money: __WEBPACK_IMPORTED_MODULE_0_v_money__["Money"] },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get('/admin/payees/all/').then(function (response) {
+            _this.payees = response.data.payees;
+            _this.authUser = response.data.authUser;
+            _this.userBalance = response.data.authUser.balance;
+        });
+    },
+
+    computed: {
+        validBalance: function validBalance() {
+            if (this.amount > this.userBalance) {
+                this.balanceErrorMessage = " Insufficient funds";
+                return false;
+            }
+            return true;
         }
-      });
+    },
+    methods: {
+        submit: function submit(event) {
+            var _this2 = this;
+
+            var formData = new FormData(event.target);
+
+            this.$validator.validateAll().then(function (result) {
+                if (result) {
+
+                    $("form").find('button[type="submit"]').addClass("disabled");
+                    axios.post('/admin/transactions/store', formData).then(function (response) {
+                        console.log(response);
+                        _this2.error = false;
+                        _this2.success = true;
+
+                        $("form").find('button[type="submit"]').removeClass("disabled");
+
+                        if (response.data.userFound) {
+                            swal({
+                                title: 'Error!',
+                                text: 'Please, Fix errors on form',
+                                type: 'error',
+                                timer: 5000
+                            }).then(function () {}, function (dismiss) {
+                                if (dismiss === 'timer') {}
+                            });
+                        } else {
+                            swal({
+                                title: 'Success!',
+                                text: 'Your transaction has been made',
+                                type: 'success',
+                                timer: 5000
+                            }).then(function () {
+                                window.location.href = '/admin/transactions/';
+                            }, function (dismiss) {
+                                if (dismiss === 'timer') {
+                                    window.location.href = '/admin/transactions/create';
+                                }
+                            });
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                        _this2.error = true;
+                        _this2.success = false;
+                        _this2.responseMessage = error.statusText;
+                    });
+                }
+            });
+        }
     }
-  }
 });
 
 /***/ }),
@@ -50085,7 +50039,9 @@ var render = function() {
                       !_vm.validBalance
                         ? _c("div", [
                             _c("p", { staticStyle: { color: "red" } }, [
-                              _vm._v("Please, Enter valid amount")
+                              _vm._v(
+                                " " + _vm._s(_vm.balanceErrorMessage) + " "
+                              )
                             ])
                           ])
                         : _c("div", [
@@ -50146,26 +50102,7 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7ed9cba0", module.exports)
-  }
-}
-
-/***/ }),
+/* 50 */,
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 

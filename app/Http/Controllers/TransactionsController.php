@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use App\transaction;
 use App\User;
-use Auth;
 use Illuminate\Http\Request;
+use Auth;
 use Validator;
 
 class TransactionsController extends Controller
@@ -36,10 +36,9 @@ class TransactionsController extends Controller
             'amount' => 'required',
         ]);
 
-        if ($validator->fails()) {
-
-            return response()->json(['errors'=>$validator->errors()]);
-            
+        if ($validator->fails()) 
+        {
+            return response()->json(['errors'=>$validator->errors()]);  
         }
 
         $transaction = new Transaction;

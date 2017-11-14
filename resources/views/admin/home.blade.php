@@ -11,7 +11,6 @@
                 <div class="col-md-6">
                     <h3>{{ auth()->user()->name }} (Username: {{ auth()->user()->username }} )</h3>
                 </div>
-                
             </div>
             <div class="row" style="padding:20px;">
                 <div class="col-md-12">

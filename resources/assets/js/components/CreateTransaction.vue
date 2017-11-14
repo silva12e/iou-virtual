@@ -28,7 +28,7 @@
 							<div class="form-group" style="padding-top:20px;">
 								<input type="hidden" name="from_user_id" v-model="authUser.id">
 								<div v-if="!validBalance">
-									<p style="color:red">Please, Enter valid amount</p>
+									<p style="color:red"> {{ balanceErrorMessage }} </p>
 								</div>
 								<div v-else>
 									<button class="btn btn-primary">Send VC</button>
@@ -52,9 +52,9 @@ export default
 			authUser:'',
 			selectedPayees:[],
 			showSendButton:true,
-			ErrorMessages:'',
 			amount:0.00,
 			userBalance:0,
+      balanceErrorMessage:'',
 
 			money: {
 	          decimal: '.',
@@ -81,7 +81,10 @@ export default
     	validBalance: function()
     	{
     		if(this.amount > this.userBalance)
+        {
+          this.balanceErrorMessage = " Insufficient funds"
     			return false;
+        }
     		return true;
     	}
     },

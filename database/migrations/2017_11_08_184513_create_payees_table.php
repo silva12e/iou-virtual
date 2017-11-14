@@ -16,6 +16,8 @@ class CreatePayeesTable extends Migration
         Schema::create('payees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
+            $table->integer('payer_id');
+            $table->integer('payee_id');
             $table->timestamps();
         });
     }
